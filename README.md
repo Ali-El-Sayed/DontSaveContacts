@@ -21,7 +21,7 @@ Clone the repository and open the project in Android Studio. Connect your Androi
 
 # Screenshot
 
-!["Screenshot"](./Screenshot.png?raw=true,"Screenshot")
+!["Screenshot"](./Screenshot.png)
 
 # Architecture
 
