@@ -1,0 +1,26 @@
+name: Commit Message Semantics Check
+
+on: [push, pull_request]
+
+jobs:
+  commit-message-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate commit messages
+        run: |
+          # Define regex for commit messages
+          regex='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert): .+'
+          
+          # Check commit messages
+          commits=$(git log --format=%B -n 10 HEAD)  # Adjust the number to the number of commits to check
+          
+          echo "$commits" | while read -r commit_message; do
+            if [[ ! $commit_message =~ $regex ]]; then
+              echo "Invalid commit message: $commit_message"
+              echo "Commit messages must start with one of the following prefixes: feat:, fix:, docs:, style:, refactor:, perf:, test:, build:, ci:, chore:, revert:"
+              exit 1  # Fail the job
+            fi
+          done
