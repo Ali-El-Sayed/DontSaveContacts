@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Full history for checking recent commits
 
       - name: Validate commit messages
         run: |
@@ -24,3 +26,7 @@ jobs:
               exit 1  # Fail the job
             fi
           done
+
+      - name: Finalize Check
+        if: success()
+        run: echo "Commit message check completed successfully."
