@@ -13,10 +13,10 @@ jobs:
         run: |
           # Define regex for commit messages
           regex='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert): .+'
-          
+
           # Check commit messages
           commits=$(git log --format=%B -n 10 HEAD)  # Adjust the number to the number of commits to check
-          
+
           echo "$commits" | while read -r commit_message; do
             if [[ ! $commit_message =~ $regex ]]; then
               echo "Invalid commit message: $commit_message"
